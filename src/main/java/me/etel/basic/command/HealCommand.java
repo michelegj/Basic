@@ -12,14 +12,14 @@ import org.bukkit.entity.Player;
 public class HealCommand extends BaseCommand {
 
     @Default
-    public boolean execute(Player player, @Optional OnlinePlayer onlinePlayer) {
+    public void execute(Player player, @Optional OnlinePlayer onlinePlayer) {
 
         FileConfiguration langConfig = Basic.getInstance().getFileManager().getConfig("lang.yml");
 
         if (onlinePlayer == null) {
             player.setHealth(player.getMaxHealth());
             player.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-self")));
-            return true;
+            return;
         }
 
         Player target = onlinePlayer.getPlayer();
@@ -33,8 +33,6 @@ public class HealCommand extends BaseCommand {
             player.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-self-other")
                     .replace("%target%", target.getDisplayName())));
         }
-
-        return false;
     }
 
 

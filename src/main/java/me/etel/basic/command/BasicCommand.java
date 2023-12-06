@@ -12,7 +12,7 @@ public class BasicCommand extends BaseCommand {
     private static final Basic plugin = Basic.getInstance();
 
     @Default
-    public boolean execute(CommandSender sender) {
+    public void execute(CommandSender sender) {
         sender.sendMessage(
                 Basic.translate(
                         "&7&m----------------------" +
@@ -22,7 +22,6 @@ public class BasicCommand extends BaseCommand {
                         "\n&7&m----------------------"
                 )
         );
-        return false;
     }
 
 

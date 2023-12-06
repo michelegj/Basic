@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class FeedCommand extends BaseCommand {
 
     @Default
-    public boolean execute(Player player, @Optional OnlinePlayer onlinePlayer) {
+    public void execute(Player player, @Optional OnlinePlayer onlinePlayer) {
 
         FileConfiguration langConfig = Basic.getInstance().getFileManager().getConfig("lang.yml");
 
@@ -20,7 +20,7 @@ public class FeedCommand extends BaseCommand {
             player.setFoodLevel(20);
             player.setSaturation(20);
             player.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-self")));
-            return true;
+            return;
         }
 
         Player target = onlinePlayer.getPlayer();
@@ -35,8 +35,6 @@ public class FeedCommand extends BaseCommand {
             player.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-self-other")
                     .replace("%target%", target.getDisplayName())));
         }
-
-        return false;
     }
 
 
