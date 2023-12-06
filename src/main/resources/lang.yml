@@ -1,0 +1,5 @@
+gamemode_command:
+  gamemode-change-self: "&6You've set your gamemode to &f%gamemode%."
+  gamemode-change-other: "&f%issuer% &6has set your gamemode to &f%gamemode%."
+  gamemode-error-self: "&eYour gamemode is already set to &f%gamemode%."
+  gamemode-error-other: "&f%target% &ealready has gamemode set to &f%gamemode%."
