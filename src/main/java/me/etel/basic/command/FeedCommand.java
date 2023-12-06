@@ -14,32 +14,30 @@ public class FeedCommand extends BaseCommand {
     @Default
     public boolean execute(Player player, @Optional OnlinePlayer onlinePlayer) {
 
-        setFood(player, onlinePlayer, Basic.getInstance().getFileManager().getConfig("lang.yml"));
+        FileConfiguration langConfig = Basic.getInstance().getFileManager().getConfig("lang.yml");
+
+        if (onlinePlayer == null) {
+            player.setFoodLevel(20);
+            player.setSaturation(20);
+            player.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-self")));
+            return true;
+        }
+
+        Player target = onlinePlayer.getPlayer();
+        target.setFoodLevel(20);
+        target.setSaturation(20);
+
+        if (target == player) {
+            player.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-self")));
+        } else {
+            target.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-other")
+                    .replace("%issuer%", player.getDisplayName())));
+            player.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-self-other")
+                    .replace("%target%", target.getDisplayName())));
+        }
+
         return false;
     }
 
-    private static void setFood(Player sender, OnlinePlayer onlinePlayer, FileConfiguration langConfig) {
-        if (onlinePlayer == null) {
-            sender.setFoodLevel(20);
-            sender.setSaturation(20);
-            sender.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-self")));
-        } else {
-            Player target = onlinePlayer.getPlayer();
-            target.setFoodLevel(20);
-            target.setSaturation(20);
-
-            if (target == sender) {
-                sender.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-self")));
-            } else {
-                target.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-other")
-                        .replace("%issuer%", sender.getDisplayName())
-                ));
-                sender.sendMessage(Basic.translate(langConfig.getString("feed_command.feed-self-other")
-                        .replace("%target%", target.getDisplayName())
-                ));
-            }
-        }
-
-    }
 
 }

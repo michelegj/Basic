@@ -14,30 +14,28 @@ public class HealCommand extends BaseCommand {
     @Default
     public boolean execute(Player player, @Optional OnlinePlayer onlinePlayer) {
 
-        setHealth(player, onlinePlayer, Basic.getInstance().getFileManager().getConfig("lang.yml"));
+        FileConfiguration langConfig = Basic.getInstance().getFileManager().getConfig("lang.yml");
+
+        if (onlinePlayer == null) {
+            player.setHealth(player.getMaxHealth());
+            player.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-self")));
+            return true;
+        }
+
+        Player target = onlinePlayer.getPlayer();
+        target.setHealth(target.getMaxHealth());
+
+        if (target == player) {
+            player.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-self")));
+        } else {
+            target.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-other")
+                    .replace("%issuer%", player.getDisplayName())));
+            player.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-self-other")
+                    .replace("%target%", target.getDisplayName())));
+        }
+
         return false;
     }
 
-    private static void setHealth(Player sender, OnlinePlayer onlinePlayer, FileConfiguration langConfig) {
-        if (onlinePlayer == null) {
-            sender.setHealth(sender.getMaxHealth());
-            sender.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-self")));
-        } else {
-            Player target = onlinePlayer.getPlayer();
-            target.setHealth(target.getMaxHealth());
-
-            if (target == sender) {
-                sender.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-self")));
-            } else {
-                target.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-other")
-                        .replace("%issuer%", sender.getDisplayName())
-                ));
-                sender.sendMessage(Basic.translate(langConfig.getString("heal_command.heal-self-other")
-                        .replace("%target%", target.getDisplayName())
-                ));
-            }
-        }
-
-    }
 
 }
