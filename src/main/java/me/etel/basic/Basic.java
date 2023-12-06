@@ -31,7 +31,6 @@ public final class Basic extends JavaPlugin {
         basicManager.enableUnstableAPI("help");
 
         this.fileManager = new FileManager();
-        this.fileManager.loadConfig("acf-lang.yml");
         this.fileManager.loadConfig("lang.yml");
 
         if (!this.registerCommands(basicManager)) {
@@ -52,7 +51,6 @@ public final class Basic extends JavaPlugin {
                     new BroadcastCommand(),
                     new FlyCommand()
             ).forEach(basicManager::registerCommand);
-            basicManager.getLocales().loadYamlLanguageFile("acf-lang.yml", Locale.ENGLISH);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
