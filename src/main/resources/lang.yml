@@ -1,5 +1,14 @@
 gamemode_command:
-  gamemode-change-self: "&6You've set your gamemode to &f%gamemode%."
-  gamemode-change-other: "&f%issuer% &6has set your gamemode to &f%gamemode%."
-  gamemode-error-self: "&eYour gamemode is already set to &f%gamemode%."
-  gamemode-error-other: "&f%target% &ealready has gamemode set to &f%gamemode%."
+  gamemode-self: "&6You've set your gamemode to &f%gamemode%."
+  gamemode-other: "&f%issuer% &6has set your gamemode to &f%gamemode%."
+  gamemode-self-other: "&6You've set &f%target% &6gamemode to &f%gamemode%."
+
+heal_command:
+  heal-self: "&6You've healed your self."
+  heal-other: "&f%issuer% &6has healed you."
+  heal-self-other: "&6You've healed %target%."
+
+feed_command:
+  feed-self: "&6You've fed your self."
+  feed-other: "&f%issuer% &6has fed you."
+  feed-self-other: "&6You've fed %target%."
