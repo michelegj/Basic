@@ -3,7 +3,9 @@ package me.etel.basic;
 import co.aikar.commands.BukkitCommandManager;
 import lombok.Getter;
 import me.etel.basic.command.BasicCommand;
+import me.etel.basic.command.FeedCommand;
 import me.etel.basic.command.GamemodeCommand;
+import me.etel.basic.command.HealCommand;
 import me.etel.basic.manager.BasicManager;
 import me.etel.basic.manager.FileManager;
 import org.bukkit.Bukkit;
@@ -47,7 +49,9 @@ public final class Basic extends JavaPlugin {
         try {
             List.of(
                     new BasicCommand(),
-                    new GamemodeCommand()
+                    new GamemodeCommand(),
+                    new HealCommand(),
+                    new FeedCommand()
             ).forEach(basicManager::registerCommand);
             basicManager.getLocales().loadYamlLanguageFile("acf-lang.yml", Locale.ENGLISH);
         } catch (Exception ex) {
