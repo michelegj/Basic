@@ -3,6 +3,8 @@ package me.etel.basic;
 import co.aikar.commands.BukkitCommandManager;
 import lombok.Getter;
 import me.etel.basic.command.BasicCommand;
+import me.etel.basic.command.GamemodeCommand;
+import me.etel.basic.manager.BasicManager;
 import me.etel.basic.manager.FileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,13 +28,14 @@ public final class Basic extends JavaPlugin {
             return;
         }
 
-        BukkitCommandManager bukkitCommandManager = new BukkitCommandManager(this);
-        bukkitCommandManager.enableUnstableAPI("help");
+        BasicManager basicManager = new BasicManager(this);
+        basicManager.enableUnstableAPI("help");
 
         this.fileManager = new FileManager();
         this.fileManager.loadConfig("acf-lang.yml");
+        this.fileManager.loadConfig("lang.yml");
 
-        if (!this.registerCommands(bukkitCommandManager)) {
+        if (!this.registerCommands(basicManager)) {
             Bukkit.getLogger().warning("[Basic] Couldn't register acf modules");
             this.getServer().getPluginManager().disablePlugin(this);
             return;
@@ -40,12 +43,13 @@ public final class Basic extends JavaPlugin {
 
     }
 
-    private boolean registerCommands(BukkitCommandManager bukkitCommandManager) {
+    private boolean registerCommands(BasicManager basicManager) {
         try {
             List.of(
-                    new BasicCommand()
-            ).forEach(bukkitCommandManager::registerCommand);
-            bukkitCommandManager.getLocales().loadYamlLanguageFile("acf-lang.yml", Locale.ENGLISH);
+                    new BasicCommand(),
+                    new GamemodeCommand()
+            ).forEach(basicManager::registerCommand);
+            basicManager.getLocales().loadYamlLanguageFile("acf-lang.yml", Locale.ENGLISH);
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
