@@ -6,9 +6,18 @@ gamemode_command:
 heal_command:
   heal-self: "&6You've healed your self."
   heal-other: "&f%issuer% &6has healed you."
-  heal-self-other: "&6You've healed %target%."
+  heal-self-other: "&6You've healed &f%target%."
 
 feed_command:
   feed-self: "&6You've fed your self."
   feed-other: "&f%issuer% &6has fed you."
-  feed-self-other: "&6You've fed %target%."
+  feed-self-other: "&6You've fed &f%target%."
+
+fly_command:
+  fly-self: "&6You've %option% your flight."
+  fly-other: "&f%issuer% &6has %option% &6your flight."
+  fly-self-other: "&6You've %option% &6for &f%target%."
+
+broadcast_command:
+  broadcast-loading: "&7Loading online players (%permission%)...."
+  broadcast-permission: "&eSuccessfully sent message to online players with &f%permission% &epermission."
